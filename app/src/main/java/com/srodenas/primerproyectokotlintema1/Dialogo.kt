@@ -1,19 +1,30 @@
 package com.srodenas.primerproyectokotlintema1
 
 class Dialogo(){
+    private lateinit var onClienteAdd: (String, String)-> Unit   //referencia a una función
+    /*
+    Se podía haber declarado de la forma private var onClienteAdd: ((String, String):Unit) ? = null
 
-    private lateinit var listener: OperacionesCliente  //ya se cargará
+    En mostrar:  //Nos aseguramos que la variable tiene una referencia a una función.
+        ....
+        onClienteAdd?.let{
+            onClienteAdd (id, nombre)
+        }
 
-    fun setListener (mListener : OperacionesCliente){  //carga el listener
-        listener = mListener
+     */
 
+
+    fun setOnClienteAddListener( add: (String, String) -> Unit) {
+        onClienteAdd = add
     }
+
+
 
     fun mostrar() {  //función que lanza el dialogo y captura los datos.
         //simulamos la captura de datos
         val id = "4"
         val nombre = "Pepito"
         println ("Simulando la captura de datos, para la inserción de un cliente")
-        listener.add(id, nombre)  //llama al listener.
+        onClienteAdd (id, nombre)  //llamada de orden superior.
     }
 }

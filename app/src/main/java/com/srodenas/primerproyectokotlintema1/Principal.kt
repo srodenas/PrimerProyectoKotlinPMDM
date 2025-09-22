@@ -1,8 +1,13 @@
 package com.srodenas.primerproyectokotlintema1
 
-class MyActivity: OperacionesCliente {
+/*
+Ejemplo con función lambda
 
-    private lateinit var clientes : MutableList<Cliente>  //Ya lo inicializaré más adelante
+ */
+
+class MyActivity{
+
+    private  var clientes : MutableList<Cliente>  //Ya lo inicializaré más adelante
 
     init{
         clientes = Repo.listClientes.toMutableList()  //cargo los datos desde el repositorio
@@ -11,7 +16,7 @@ class MyActivity: OperacionesCliente {
     fun init(){
         println ("Simulando click en el botón para abrir el diálogo y captura de datos")
         Thread.sleep(2000)  //Simulamos que tarde lo que tarde
-        onButtonClick()  //
+        onButtonClick()  //  Invocamos al dialogo. Simulamos que el usuario ha pulsado add.
         println ("Muestro todos los registros")
         clientes.forEach{
             println (it)
@@ -23,12 +28,14 @@ class MyActivity: OperacionesCliente {
     // Función que simula el click de un botón
     fun onButtonClick(){
         val dialogo = Dialogo()
-        dialogo.setListener(this)
+        dialogo.setOnClienteAddListener{ id, nombre ->
+            add (id, nombre)  //invocamos al método add
+        }
         dialogo.mostrar()
 
     }
 
-    override fun add(id: String, nombre: String): Cliente {
+    fun add(id: String, nombre: String): Cliente {
         val nuevo = Cliente (id, nombre)
         clientes.add(nuevo)
         println ("Cliente añadido con id= $id y nombre= $nombre")
