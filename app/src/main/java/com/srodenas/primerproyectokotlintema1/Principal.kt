@@ -2,7 +2,7 @@ package com.srodenas.primerproyectokotlintema1
 
 class MyActivity: OperacionesCliente {
 
-    private lateinit var clientes : MutableList<Cliente>  //Ya lo inicializaré más adelante
+    private  var clientes : MutableList<Cliente>  //Ya lo inicializaré más adelante
 
     init{
         clientes = Repo.listClientes.toMutableList()  //cargo los datos desde el repositorio
